@@ -57,7 +57,6 @@ if user_name:
         cols = st.columns(2)  # 2열로 배치
         airline = [data['항공사명'] for data in airlineList]
         code = [data['항공사코드'] for data in airlineList]
-        print(len(airline), len(code))
         for i, name in enumerate(airline):
             with cols[i % 2]:
                 airline_card(name, code[i], selection)
