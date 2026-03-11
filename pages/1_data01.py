@@ -34,7 +34,7 @@ if data:
     st.subheader("✈️ 항공사별 지연 건수 (1987.10 ~ 1989.12)")
 
     # 보기 옵션 선택창
-    view_option = st.radio("", ["Top 5", "전체 보기"], horizontal=True)
+    view_option = st.radio("선택:", ["Top 5", "전체 보기"], horizontal=True, label_visibility="collapsed")
 
     # 선택에 따른 데이터 필터링
     if view_option == "Top 5":
@@ -56,7 +56,7 @@ if data:
     st.plotly_chart(fig_bar, width='stretch')
 
     # 데이터 보기
-    with st.expander("원본 데이터 상세보기"):
+    with st.expander("원본 데이터 보기"):
         st.dataframe(df)
 else:
     st.info("표시할 데이터가 없습니다.")
