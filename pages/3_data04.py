@@ -114,7 +114,53 @@ if choice :
 
 
     elif choice == '분기별':
-      pass
+            df = pd.DataFrame(result)
+        
+            # 데이터 타입 변환
+            df['전체비행수'] = pd.to_numeric(df['전체비행수'])
+            df['취소비행비율'] = pd.to_numeric(df['취소비행비율'])
+            st.subheader(f"📊 {choice} 데이터 시각화")
+            
+            # X축용 기간 컬럼 생성
+            df['기간'] = df['년도'].astype(str) + "년 " + df['분기'].astype(str)
+            
+            # 
+            # 1. 이중 축 그래프 생성
+            fig = make_subplots(specs=[[{"secondary_y": True}]])
+
+            # 전체 비행수 (막대) - 항공사를 색상으로 구분하여 분기별로 나열
+            fig.add_trace(
+                go.Bar(
+                    x=[df['기간'], df['항공사']], # X축을 기간과 항공사 두 단계로 설정
+                    y=df['전체비행수'], 
+                    name="전체비행수"
+                ),
+                secondary_y=False,
+            )
+
+            # 취소비행비율 (선)
+            fig.add_trace(
+                go.Scatter(
+                    x=[df['기간'], df['항공사']], 
+                    y=df['취소비행비율'], 
+                    name="취소비행비율", 
+                    mode='markers'
+                ),
+                secondary_y=True,
+            )
+
+            fig.update_layout(
+                title_text="전체 분기별 항공사 데이터",
+                xaxis_title="기간 및 항공사",
+                xaxis_tickangle=-45,
+                showlegend=True,
+                legend=dict(orientation="h", y=1.5, xanchor="center",x=0.5),
+            )
+
+            
+            fig.update_yaxes(secondary_y=True, range=[0, 5])
+
+            st.plotly_chart(fig, width='stretch')
     
     elif choice == '월별':
       max_row = max(result, key=lambda x: x['취소비행비율'])
