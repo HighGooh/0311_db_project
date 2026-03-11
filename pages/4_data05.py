@@ -22,3 +22,4 @@ def get_data():
 if st.button("차트그리기"):
     st.bar_chart(data= get_data(), x="항공사명", y="평균초과비행시간")
     st.dataframe(get_data(), use_container_width=True, hide_index=True)
+    
