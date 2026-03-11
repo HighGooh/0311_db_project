@@ -1,0 +1,14 @@
+[project]
+name = "0311-db-project"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "mariadb>=1.1.14",
+    "numpy>=2.4.2",
+    "pandas>=2.3.3",
+    "plotly>=6.6.0",
+    "pydantic-settings>=2.13.1",
+    "streamlit>=1.55.0",
+]
